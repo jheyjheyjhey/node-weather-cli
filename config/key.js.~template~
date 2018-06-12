@@ -1,0 +1,6 @@
+var keys = {
+    GOOGLE_GEOLOCATION_API_KEY: '',
+    DARK_SKY_API_KEY: ''
+};
+
+module.exports = keys;
