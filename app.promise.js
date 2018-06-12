@@ -2,10 +2,12 @@ const yargs = require("yargs");
 const axios = require('axios');
 const keys = require('./config/key');
 
+const defaultAddress = 'Bicutan';
+
 const argv = yargs
   .options({
     a: {
-      demand: true,
+      demand: false,
       alias: "address",
       describe: "Address for getting weather",
       string: true
@@ -15,7 +17,7 @@ const argv = yargs
   .alias("help", "h")
   .argv;
 
-let encodedAddress = encodeURIComponent(argv.address) || "";
+let encodedAddress = encodeURIComponent(argv.address || defaultAddress);
 var geocodeURL = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodedAddress}&key=${keys.GOOGLE_GEOLOCATION_API_KEY}`;
 
 axios.get(geocodeURL).then((response) => {
