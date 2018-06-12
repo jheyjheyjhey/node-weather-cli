@@ -2,19 +2,24 @@ const yargs = require("yargs");
 const geocode = require('./geocode/geocode')
 const weather = require('./weather/weather')
 
+const defaultAddress = "Bicutan";
+
 const argv = yargs
   .options({
     a: {
-      demand: true,
+      demand: false,
       alias: "address",
       describe: "Address for getting weather",
       string: true
     }
   })
   .help()
-  .alias("help", "h").argv;
+  .alias("help", "h")
+  .argv;
 
-geocode.geocodeAddress(argv.address, (err, res) => {
+let address = argv.address || defaultAddress;
+
+geocode.geocodeAddress(address, (err, res) => {
   if (err)
     console.log(err)
   else {
